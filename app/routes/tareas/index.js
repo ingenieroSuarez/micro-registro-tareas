@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router();
 const {tareasController}= require('../../controllers/tareas/tareas.controller')
+const {validarAutorizacion}= require('../../middleware/validarAutorizacion')
 
-router.get('/', async (req, res)=>{
+router.get('/',validarAutorizacion, async (req, res)=>{
     const {usuarioId }=  req.body;
     const respuesta= new tareasController()
     try {
@@ -12,7 +13,7 @@ router.get('/', async (req, res)=>{
     }
 })
 
-router.post('/', async (req, res)=>{
+router.post('/', validarAutorizacion, async (req, res)=>{
     const {usuarioId, descripcion }=  req.body;
     const respuesta= new tareasController()
     try {
@@ -22,7 +23,7 @@ router.post('/', async (req, res)=>{
     }
 })
 
-router.put('/', async (req, res)=>{
+router.put('/', validarAutorizacion, async (req, res)=>{
     const { idtarea, descripcion, finalizada }=  req.body;
     const respuesta= new tareasController()
     try {
@@ -32,7 +33,7 @@ router.put('/', async (req, res)=>{
     }
 })
 
-router.delete('/', async (req, res)=>{
+router.delete('/', validarAutorizacion, async (req, res)=>{
     const { idtarea }=  req.body;
     const respuesta= new tareasController()
     try {
